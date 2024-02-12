@@ -2,6 +2,7 @@ const express =  require("express")
 const bcrypt = require("bcryptjs")
 const studentModel = require("../models/studentModel")
 const { Model } = require("mongoose")
+const viewMarkmodel = require("../models/markModel")
 
 const router=express.Router()
 
@@ -32,6 +33,12 @@ router.post("/addstudent",async(req,res)=>{
 router.get("/viewall",async(req,res)=>{
     let data = await studentModel.find()
     res.json(data)
+})
+
+router.get("/viewmark",async(req,res)=>{
+    let result = await viewMarkmodel.find()
+    .populate("studentid","name rollno admno -_id").exec()
+    res.json(result)
 })
 
 module.exports=router
