@@ -41,7 +41,7 @@ router.post("/loginstud",async(req,res)=>{
     } else {
         return res.json(
             {
-                status:"success"
+                status:"success","studid":data
             }
         )
     }
